@@ -1,5 +1,8 @@
 # Candango Automat-o-es
 
+[![Join the chat at https://gitter.im/candango/automatoes](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/candango/automatoes)
+[![Build Status](https://travis-ci.org/candango/automatoes.svg?branch=develop)](https://travis-ci.org/candango/automatoes)
+
 Automatoes is a [Let's Encrypt](https://letsencrypt.org)/[ACME](https://github.com/ietf-wg-acme/acme/)
 client for advanced users and developers. It is intended to be used by anyone
 because we don't care if you're a robot, a processes or a person.
@@ -10,13 +13,14 @@ original project and to be a direct replacement from
 
 ## Why?
 
-Bacause Let's Encrypt's point is to be to be automatic and seamless and ManuaLE
-was great but it was designed to be manual.
+Bacause Let's Encrypt's point is to be automatic and seamless and ManuaLE was
+designed to be manual.
 
-Automatoes will add automatic workflows and features to the users also keep
-maintaining bug fixes, refactor tasks.
+Automatoes will add automatic workflows and new features to evolve ManuaLe's
+legacy. The project also will keep performing maintenance tasks as bug fixes
+and refactory.
 
-ManuaLe was archived but it's way to do things is awesome.
+Automatoes is an ACME V2 replacement to ManuaLE.
 
 ## Features
 
@@ -141,9 +145,17 @@ The manuale command will interface ACME V2 only as V1 is reaching
 [End Of Life](https://community.letsencrypt.org/t/end-of-life-plan-for-acmev1/88430).
 
 The account file structure from ManuaLE is maintained, no change here.
-For Let's Encrypt servers need to change the url from V1 api to V2 api that is
-being covered by [#30](https://github.com/candango/automatoes/issues/30). After
-that you don't need even to register an ACME V2 account.
+
+For Let's Encrypt servers it is necessary to change the uri from V1 api to V2.
+With [#30](https://github.com/candango/automatoes/issues/30) we'll warn you
+about your uri being Let's Encrypt ACME V1 and run with a correct ACME V2
+without fixing the account.json file.
+
+To fix the account.json file permanently run `manuale upgrade` and after
+confirmation your account uri will be changed to the Let's Encrypt ACME V2 uri.
+
+The upgrade action will only act against an account uri from production Let's
+Encrypt ACME V1 otherwise nothing will be executed.
 
 ACME V2 works with an 
 [order workflow](https://tools.ietf.org/html/rfc8555#section-7.1) that must be
@@ -260,6 +272,8 @@ providing more output.
 * [Other clients](https://community.letsencrypt.org/t/list-of-client-implementations/2103)
 
 ## Support
+
+For direct support [join gitter chat at https://gitter.im/candango/automatoes](https://gitter.im/candango/automatoes).
 
 Automatoes is one of
 [Candango Open Source Group](http://www.candango.org/projects/)

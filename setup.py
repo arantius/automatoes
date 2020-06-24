@@ -35,9 +35,17 @@ with open("README.md", "r") as fh:
 
 # Solution from http://bit.ly/29Yl8VN
 def resolve_requires(requirements_file):
-    requirements = parse_requirements("./%s" % requirements_file,
-                                      session=False)
-    return [str(ir.req) for ir in requirements]
+    try:
+        requirements = parse_requirements("./%s" % requirements_file,
+                                          session=False)
+        return [str(ir.req) for ir in requirements]
+    except AttributeError:
+        # for pip >= 20.1.x
+        # Need to run again as the first run was ruined by the exception
+        requirements = parse_requirements("./%s" % requirements_file,
+                                          session=False)
+        # pr stands for parsed_requirement
+        return [str(pr.requirement) for pr in requirements]
 
 
 setup(
@@ -52,7 +60,7 @@ setup(
     author=automatoes.get_author(),
     author_email=automatoes.get_author_email(),
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: Apache Software License",
         "Environment :: Console",
         "Environment :: Web Environment",
