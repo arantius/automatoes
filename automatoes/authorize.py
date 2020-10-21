@@ -167,17 +167,20 @@ def authorize(server, paths, account, domains, method, verbose=False):
                 # path sanity check
                 assert (token and os.path.sep not in token and '.' not in
                         token)
-                files.add(token)
+                d = os.path.join(current_path, 'acme-challenge')
+                if not os.path.exists(d): os.makedirs(d)
+                f = os.path.join(d, token)
+                files.add(f)
                 fs.write(
-                    os.path.join(current_path, token),
+                    f,
                     "%s.%s" % (token,
                                generate_jwk_thumbprint(account.key))
                 )
                 print("    http://{}/.well-known/acme-challenge/{}".format(
                     challenge.domain, token))
 
-            print("\n  The necessary files have been written to the current "
-                  "directory.\n")
+            print("\n  The necessary files have been written to the "
+                  "`acme-challenge` directory (in the current directory).\n")
         # Wait for the user to complete the challenges
         input("\nPress Enter to continue.\n")
 
